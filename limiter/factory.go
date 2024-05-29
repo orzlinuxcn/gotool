@@ -16,6 +16,6 @@ func NewLimiter(limiterType string, r float64, b int64) ILimiter {
 	case consts.LimiterTypeSingle:
 		return NewSingleLimiter(r, b)
 	default:
-		return NewSingleLimiter(r, b)
+		return NewSafeLimiter(r, b, consts.RedisLimiterDefaultName)
 	}
 }
