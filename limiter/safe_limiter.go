@@ -29,7 +29,7 @@ func NewSafeLimiter(r float64, b int64, soleID string) *SafeLimiter {
 		rate:         r,
 		burst:        b,
 		soleID:       soleID,
-		redisClient:  redis2.NewRedis(),
+		redisClient:  redis2.GetRedis(),
 		timePerToken: int64(1 * 1000 * 1000 * 1000 / r),
 	}
 }

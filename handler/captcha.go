@@ -1,18 +1,18 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/orzlinuxcn/gotool/utils/redis"
 	"math/rand"
 	"net/http"
-	"strconv"
 	"time"
 )
 
 func GetCaptchaCode(c *gin.Context) {
 	client := redis.GetRedis()
 	randNum := rand.Int() % (1000 * 1000)
-	randStr := strconv.FormatInt(int64(randNum), 10)
+	randStr := fmt.Sprintf("%06d", randNum)
 	cmd := client.Set(randStr, randStr, time.Minute*10)
 	if cmd.Err() != nil {
 		c.String(http.StatusInternalServerError, "err")
